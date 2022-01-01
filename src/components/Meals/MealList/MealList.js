@@ -19,7 +19,7 @@ const MealList = (props) => {
               price={mi.price}
               max_quantity={mi.max_quantity}
             />
-            <MealItemForm />
+            <MealItemForm id={mi.id} max_quantity={mi.max_quantity} />
           </Card>
         </li>
       ))}

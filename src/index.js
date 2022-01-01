@@ -1,6 +1,14 @@
+import React from "react";
 import ReactDOM from "react-dom";
 
-import "./index.css";
+import { OrderContextProvide } from "./store/order-context";
 import App from "./App";
 
-ReactDOM.render(<App />, document.getElementById("root"));
+import "./index.css";
+
+ReactDOM.render(
+  <OrderContextProvide>
+    <App />
+  </OrderContextProvide>,
+  document.getElementById("root")
+);

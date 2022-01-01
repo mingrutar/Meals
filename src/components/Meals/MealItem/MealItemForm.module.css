@@ -8,6 +8,10 @@
   /* border: 2px solid red; */
 }
 
+.form p {
+  color: red;
+  font-style: italic;
+}
 .form button {
   font: inherit;
   cursor: pointer;
