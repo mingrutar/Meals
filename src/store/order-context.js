@@ -15,26 +15,31 @@ export const OrderContextProvide = (props) => {
     customer: { name: "John", phone: "123-333-4444" }, //placeholder
   };
   const addMealHandler = (mealId, quantity) => {
-    console.debug(`addMealHandler: id=${mealId}, quatity=${quantity}`);
-    // const meals = Order.meals.find((meal) => meal.id === mealId);
-    // if (meals.length === 0) {
-    //   Order.meals.add({ id: mealId, quantity: quantity });
-    //   setNumberMeal(Order.meals.length);
-    // } else {
-    //   console.debug(
-    //     `updating quatity for  ${mealId} from ${meals[0].quantity} to ${quantity}`
-    //   );
-    //   meals[0].quantity = quantity;
-    // }
+    // console.debug(`addMealHandler: id=${mealId}, quatity=${quantity}`);
+    const meals = Order.meals.find((meal) => meal.id === mealId);
+    if (!meals) {
+      Order.meals.push({ id: mealId, quantity: quantity });
+      setNumberMeal(Order.meals.length);
+    } else {
+      console.debug(
+        `updating quatity for  ${mealId} from ${meals[0].quantity} to ${quantity}`
+      );
+      meals[0].quantity = quantity;
+    }
+    console.debug(
+      `addMealHandler: added (${mealId}, ${quantity} order=`,
+      Order.meals
+    );
   };
   const deleteMealHandler = (mealId) => {
     console.debug(`deleteMealHandler: id=${mealId}`);
-    // const idx = Order.meals.findIndex((meal) => meal.id === mealId);
-    // if (idx > -1) {
-    //   Order.meals.splice(idx, 1);
-    //   setNumberMeal(Order.meals.length);
-    // } else
-    //   console.log(`Meal ${mealId} is not found in order, cannot be deleted`);
+    const idx = Order.meals.findIndex((meal) => meal.id === mealId);
+    if (idx > -1) {
+      Order.meals.splice(idx, 1);
+      setNumberMeal(Order.meals.length);
+      console.log(`delMealHandler(${mealId}),orde= `, Order.meals);
+    } else
+      console.log(`Meal(${mealId}) is not found in order, cannot be deleted`);
   };
   const getOrder = () => {
     return Order;
