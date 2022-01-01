@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import MainHeader from "./components/MainHeader/MainHeader";
 import Card from "./components/UI/Card/Card";
 import MealItem from "./components/Meals/MealItem/MealItem";
-// import MealItemForm from "./components/Meals/MealItem/MealItemForm";
+import MealItemForm from "./components/Meals/MealItem/MealItemForm";
 
 import styles from "./App.module.css";
 
@@ -42,22 +42,20 @@ function App() {
     // <div className={styles.main}>
     <React.Fragment>
       <MainHeader onViewCart={viewOrderHandler} />
-      <main>
-        <ul className={styles.ul}>
-          {menuList.map((mi) => (
-            <li key={mi.id}>
-              <Card>
-                <MealItem
-                  name={mi.name}
-                  description={mi.description}
-                  price={mi.price}
-                />
-                {/* <MealItemForm /> */}
-              </Card>
-            </li>
-          ))}
-        </ul>
-      </main>
+      <ul className={styles.ul}>
+        {menuList.map((mi) => (
+          <li key={mi.id}>
+            <Card>
+              <MealItem
+                name={mi.name}
+                description={mi.description}
+                price={mi.price}
+              />
+              <MealItemForm />
+            </Card>
+          </li>
+        ))}
+      </ul>
     </React.Fragment>
   );
 }
