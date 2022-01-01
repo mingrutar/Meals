@@ -23,13 +23,13 @@ function App() {
       price: 16.5,
     },
     {
-      id: 1,
+      id: 3,
       name: "Barbecue",
       description: "Popular american food",
       price: 12.99,
     },
     {
-      id: 1,
+      id: 4,
       name: "whatever",
       description: "International food",
       price: 10.99,
