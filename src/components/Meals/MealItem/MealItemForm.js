@@ -19,9 +19,11 @@ const MealItemForm = (props) => {
     setQuantity(qual);
   };
   return (
-    <form className={styles.form} onSubmit={addMeal}>
-      <Input label="Amount" value={quantity} onBlur={onValidateHandler}></Input>
-      <Button type="submit">+ Add</Button>
+    <form className={styles.form}>
+      <Input label="Amount" onBlur={onValidateHandler}></Input>
+      <Button type="button" onClick={addMeal}>
+        + Add
+      </Button>
     </form>
   );
 };
