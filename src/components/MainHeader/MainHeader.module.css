@@ -1,12 +1,12 @@
 .main-header {
-  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 12rem;
+  height: 15rem;
   background-image: url("./meals.jpg");
   /* border:2px solid red; */
   align-items: center;
+  display: flex;
 }
 
 .main-header div {
