@@ -20,8 +20,8 @@ const MealItemForm = (props) => {
   };
   return (
     <form className={styles.form} onSubmit={addMeal}>
-      <Input title="Amount" value={quantity} onBlur={onValidateHandler}></Input>
-      <Button type="submit">Add</Button>
+      <Input label="Amount" value={quantity} onBlur={onValidateHandler}></Input>
+      <Button type="submit">+ Add</Button>
     </form>
   );
 };
