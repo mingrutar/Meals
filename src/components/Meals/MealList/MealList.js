@@ -13,9 +13,11 @@ const MealList = (props) => {
         <li key={mi.id}>
           <Card className={styles.menu}>
             <MealItem
+              id={mi.id}
               name={mi.name}
               description={mi.description}
               price={mi.price}
+              max_quantity={mi.max_quantity}
             />
             <MealItemForm />
           </Card>

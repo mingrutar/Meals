@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 
 import MainHeader from "./components/MainHeader/MainHeader";
 import MealList from "./components/Meals/MealList/MealList";
@@ -11,24 +11,28 @@ function App() {
       name: "Sushi",
       description: "Finest fish and veggies",
       price: 22.99,
+      max_quantity: 100,
     },
     {
       id: 2,
       name: "Schnitzel",
       description: "A german specialty",
       price: 16.5,
+      max_quantity: 150,
     },
     {
       id: 3,
       name: "Barbecue",
       description: "Popular american food",
       price: 12.99,
+      max_quantity: 1001,
     },
     {
       id: 4,
       name: "whatever",
       description: "International food",
       price: 10.99,
+      max_quantity: undefined,
     },
   ];
   const viewOrderHandler = () => {
