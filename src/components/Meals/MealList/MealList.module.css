@@ -1,0 +1,16 @@
+.menu {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px solid #777;
+}
+
+ul {
+  /* margin-top: 5rem; */
+  list-style: none;
+  padding: 1rem;
+  background-color: white;
+  border-bottom: 1px solid #aaaaaa;
+  border: 2px solid blue;
+}
+

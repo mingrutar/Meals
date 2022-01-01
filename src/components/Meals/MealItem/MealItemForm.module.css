@@ -1,5 +1,11 @@
 .form {
-  text-align: right;
+  /* margin: 0;
+  padding: 0; */
+  width: 50%;
+  margin-left:50%;
+  /* float: right; */
+  align-items: flex-end;
+  border: 2px solid red;
 }
 
 .form button {
@@ -17,4 +23,13 @@
 .form button:active {
   background-color: #641e03;
   border-color: #641e03;
+}
+
+
+.meal {
+  display: block;
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px solid #ccc;
+  align-items: flex-start;
 }

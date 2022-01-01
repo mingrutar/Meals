@@ -1,11 +1,7 @@
 import React, { useContext } from "react";
 
 import MainHeader from "./components/MainHeader/MainHeader";
-import Card from "./components/UI/Card/Card";
-import MealItem from "./components/Meals/MealItem/MealItem";
-import MealItemForm from "./components/Meals/MealItem/MealItemForm";
-
-import styles from "./App.module.css";
+import MealList from "./components/Meals/MealList/MealList";
 
 function App() {
   //TODO: popup OrderSummery Modal
@@ -42,20 +38,7 @@ function App() {
     // <div className={styles.main}>
     <React.Fragment>
       <MainHeader onViewCart={viewOrderHandler} />
-      <ul className={styles.ul}>
-        {menuList.map((mi) => (
-          <li key={mi.id}>
-            <Card>
-              <MealItem
-                name={mi.name}
-                description={mi.description}
-                price={mi.price}
-              />
-              <MealItemForm />
-            </Card>
-          </li>
-        ))}
-      </ul>
+      <MealList menuList={menuList} />
     </React.Fragment>
   );
 }
