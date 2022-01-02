@@ -9,12 +9,15 @@ const OrderContext = createContext({
 });
 
 export const OrderContextProvide = (props) => {
-  const [meals, setMeals] = useState([]);
   const [mealCounter, setMealCounter] = useState(0);
+  const [meals, setMeals] = useState([]);
 
   useEffect(() => {
     const total = meals.reduce((sum, x) => (sum += x.quantity), 0);
     setMealCounter(total);
+    return () => {
+      console.log(`mealCounter=${mealCounter}`);
+    };
   }, [meals]);
 
   // lost date in 2nd call const Order = {
