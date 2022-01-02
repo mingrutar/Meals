@@ -4,6 +4,7 @@ import React, { useState, useEffect, createContext } from "react";
 const OrderContext = createContext({
   totalMeals: 0,
   order: () => [],
+  cleanOrder: () => {},
   onAdd: (mealId, quantity) => {},
   onRemove: (mealId) => {},
   onUpdate: (mealId, val) => {},
@@ -68,7 +69,9 @@ export const OrderContextProvide = (props) => {
   const getOrder = () => {
     return meals;
   };
-
+  const cleanUp = () => {
+    setMeals([]);
+  };
   return (
     <OrderContext.Provider
       value={{
@@ -77,6 +80,7 @@ export const OrderContextProvide = (props) => {
         onRemove: deleteMealHandler,
         onUpdate: onUpdateHandler,
         order: getOrder,
+        cleanOrder: cleanUp,
       }}
     >
       {props.children}

@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import MainHeader from "./components/MainHeader/MainHeader";
 import MealList from "./components/Meals/MealList/MealList";
 import Cart from "./components/Cart/Cart";
+import OrderContext from "./store/order-context";
+import Modal from "./components/UI/Modal/Modal";
 
 const menuList = [
   {
@@ -36,19 +38,28 @@ const menuList = [
 ];
 
 function App() {
+  const orderCtx = useContext(OrderContext);
+
   const [showCart, setShowCart] = useState(false);
+  const [ordering, setOrdering] = useState(null);
 
-  //TODO: popup OrderSummery Modal
-  const menulookup = {};
-  menuList.forEach((mi) => (menulookup[mi.id] = mi));
-  localStorage.setItem("menu", JSON.stringify(menulookup));
-
+  const storeMenu = () => {
+    const menulookup = {};
+    menuList.forEach((mi) => (menulookup[mi.id] = mi));
+    localStorage.setItem("menu", JSON.stringify(menulookup));
+  };
+  storeMenu();
   const viewOrderHandler = () => {
     setShowCart(true);
   };
-
   const onOrderHandler = (order) => {
     console.log("Order meals ...", order);
+    setOrdering({ title: "Order ...", message: "Please click okay" });
+  };
+  const resetOrder = () => {
+    orderCtx.cleanOrder();
+    setOrdering(null);
+    setShowCart(false);
   };
   const onCloseHandler = () => {
     setShowCart(false);
@@ -59,6 +70,14 @@ function App() {
     <React.Fragment>
       <MainHeader onViewCart={viewOrderHandler} />
       {showCart && <Cart onClose={onCloseHandler} onOrder={onOrderHandler} />}
+      {ordering !== null && (
+        <Modal
+          title={ordering.title}
+          message={ordering.message}
+          reset={resetOrder}
+        ></Modal>
+      )}
+
       <MealList menuList={menuList} />
     </React.Fragment>
   );
