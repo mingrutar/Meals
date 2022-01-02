@@ -2,18 +2,20 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 15rem;
+  height: 20rem;
   background-image: url("./meals.jpg");
   /* border:2px solid red; */
-  align-items: center;
+  align-items: top;
   display: flex;
 }
 
 .main-header div {
   display: flex;
+  width: 100%;
+  height: 5rem;
   justify-content: space-between;
   align-items: center;
-  margin-top: 1rem;
+  /* margin-top: 1rem; */
   padding: 0 2rem;
   background-color: rgba(199, 60, 5, 0.9);
   color: white;

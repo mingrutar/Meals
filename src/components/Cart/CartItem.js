@@ -1,9 +1,5 @@
-import React, { useContext } from "react";
+import React from "react";
 
-import orderContext from "../../../store/order-context";
-
-import Input from "../../UI/Input/Input";
-import Button from "../../UI/Button/Button";
 import styles from "./CartItem.module.css";
 
 const CartItem = (props) => {

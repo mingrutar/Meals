@@ -11,7 +11,8 @@ const Cart = (props) => {
   const orderCtx = useContext(orderContext);
 
   const order = orderCtx.order();
-  const menu = localStorage.getItem("menu");
+  // const menu = localStorage.getItem("menu");
+  const menu = props.menu;
   let total = 0;
   const orderDetails = order.map((meal) => {
     const mid = menu[meal.id]; // menu item detal
