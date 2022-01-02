@@ -14,43 +14,32 @@ const MealItemForm = (props) => {
   const [isValid, setIsValid] = useState(true);
   const [quantity, setQuantity] = useState("");
 
-  useEffect(() => {
-    console.debug("useEffect ENTER: isValid=" + isValid);
-    if (!isValid) {
-      return () => {
-        setQuantity("");
-        console.debug("useEffect CLEAN UP: setQuantity()");
-      };
-    } else {
-      // TODO works?
-      return () => {
-        console.debug("useEffect CLEAN UP: none");
-      };
-    }
-  }, [isValid]);
+  // useEffect(() => {
+  //   console.debug("useEffect ENTER: isValid=" + isValid);
+  //   if (!isValid) {
+  //     return () => {
+  //       setQuantity("");
+  //       console.debug("useEffect CLEAN UP: setQuantity()");
+  //     };
+  //   } else {
+  //     // TODO works?
+  //     return () => {
+  //       console.debug("useEffect CLEAN UP: none");
+  //     };
+  //   }
+  // }, [isValid]);
 
-  //TODO: use Context
   const addMeal = () => {
-    console.log(`quality=${quantity}`);
-    orderCtx.onAdd(props.id, quantity);
+    if (quantity.trim().length > 0) orderCtx.onAdd(props.id, +quantity);
+    else console.log(`Please enter a valid quality`);
   };
   // check entered is a number
   const onChangeHandler = (event) => {
     const enteredVal = event.target.value;
     const isValNumber =
-      enteredVal.length > 0 ? validator.isNumeric(enteredVal) : true;
-    setQuantity(enteredVal);
+      enteredVal.trim().length > 0 ? validator.isNumeric(enteredVal) : true;
     setIsValid(isValNumber);
-  };
-  // check if exceed max_quantity
-  const onValidateHandler = (event) => {
-    if (props.max_quantity && quantity > props.max_quantity) {
-      // TODO: Modal ; change to max_quantity or 0
-      console.log(
-        `quantity ${quantity} > props.max_quantity ${props.max_quantity},`
-      );
-      setQuantity(props.max_quantity); // TODO: take result of Modal
-    }
+    if (isValNumber) setQuantity(enteredVal);
   };
   return (
     <form className={styles.form}>
@@ -58,7 +47,8 @@ const MealItemForm = (props) => {
       <Input
         label="Amount"
         onChange={onChangeHandler}
-        onBlur={onValidateHandler}
+        onBlur={() => {}}
+        value={quantity}
       ></Input>
       <Button type="button" onClick={addMeal}>
         + Add
