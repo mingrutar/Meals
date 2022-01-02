@@ -9,6 +9,7 @@
 }
 
 .form p {
+  margin-top: 2rem;
   color: red;
   font-style: italic;
 }

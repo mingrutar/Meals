@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import validator from "validator";
 
 import orderContext from "../../../store/order-context";
@@ -14,21 +14,6 @@ const MealItemForm = (props) => {
   const [isValid, setIsValid] = useState(true);
   const [quantity, setQuantity] = useState("");
 
-  // useEffect(() => {
-  //   console.debug("useEffect ENTER: isValid=" + isValid);
-  //   if (!isValid) {
-  //     return () => {
-  //       setQuantity("");
-  //       console.debug("useEffect CLEAN UP: setQuantity()");
-  //     };
-  //   } else {
-  //     // TODO works?
-  //     return () => {
-  //       console.debug("useEffect CLEAN UP: none");
-  //     };
-  //   }
-  // }, [isValid]);
-
   const addMeal = () => {
     if (quantity.trim().length > 0) orderCtx.onAdd(props.id, +quantity);
     else console.log(`Please enter a valid quality`);
@@ -43,7 +28,6 @@ const MealItemForm = (props) => {
   };
   return (
     <form className={styles.form}>
-      {!isValid && <p>Please enter amount number</p>}
       <Input
         label="Amount"
         onChange={onChangeHandler}
@@ -53,6 +37,7 @@ const MealItemForm = (props) => {
       <Button type="button" onClick={addMeal}>
         + Add
       </Button>
+      {!isValid && <p>Please enter amount number</p>}
     </form>
   );
 };
