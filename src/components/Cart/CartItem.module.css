@@ -1,4 +1,4 @@
-.cart-item {
+.cart_item {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -6,7 +6,6 @@
   padding: 1rem 0;
   margin: 1rem 0;
 }
-
 .cart-item h2 {
   margin: 0 0 0.5rem 0;
   color: #363636;

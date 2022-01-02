@@ -1,11 +1,10 @@
 ul {
   list-style: none;
-  margin-top: 5rem;
+  margin: 5rem;
   width: 50rem;
   max-width: 90%;
   padding: 0;
   background-color: white;
-  /* border: 2px solid blue; */
 }
 .menu {
   display: flex;

@@ -6,6 +6,7 @@ const OrderContext = createContext({
   order: () => [],
   onAdd: (mealId, quantity) => {},
   onRemove: (mealId) => {},
+  onUpdate: (mealId, val) => {},
 });
 
 export const OrderContextProvide = (props) => {
@@ -15,9 +16,7 @@ export const OrderContextProvide = (props) => {
   useEffect(() => {
     const total = meals.reduce((sum, x) => (sum += x.quantity), 0);
     setMealCounter(total);
-    return () => {
-      console.log(`mealCounter=${mealCounter}`);
-    };
+    return () => {};
   }, [meals]);
 
   // lost date in 2nd call const Order = {
@@ -26,7 +25,7 @@ export const OrderContextProvide = (props) => {
   //   customer: { name: "John", phone: "123-333-4444" }, //placeholder
   // };
   const addMealHandler = (mealId, quantity) => {
-    console.debug(`addMealHandler: (${mealId}, ${+quantity}) meals=`, meals);
+    // console.debug(`addMealHandler: (${mealId}, ${+quantity}) meals=`, meals);
     const idx = meals.findIndex((meal) => meal.id === mealId);
     if (idx < 0) {
       // new
@@ -44,7 +43,7 @@ export const OrderContextProvide = (props) => {
     }
   };
   const deleteMealHandler = (mealId) => {
-    console.debug(`deleteMealHandler: id=${mealId}`);
+    // console.debug(`deleteMealHandler: id=${mealId}`);
     const idx = meals.findIndex((meal) => meal.id === mealId);
     if (idx > -1)
       setMeals((prev) => {
@@ -53,6 +52,18 @@ export const OrderContextProvide = (props) => {
       });
     else
       console.log(`Meal(${mealId}) is not found in order, cannot be deleted`);
+  };
+  const onUpdateHandler = (mealId, val) => {
+    console.debug(`onUpdateHandler: (${mealId}, ${+val})`);
+    const idx = meals.findIndex((meal) => meal.id === mealId);
+    if (idx > -1) {
+      const newVal = Math.max(meals[idx]["quantity"] + val, 0);
+      setMeals((prev) => {
+        const curOrder = [...prev];
+        curOrder[idx]["quantity"] = newVal;
+        return curOrder;
+      });
+    }
   };
   const getOrder = () => {
     return meals;
@@ -64,6 +75,7 @@ export const OrderContextProvide = (props) => {
         totalMeals: mealCounter,
         onAdd: addMealHandler,
         onRemove: deleteMealHandler,
+        onUpdate: onUpdateHandler,
         order: getOrder,
       }}
     >

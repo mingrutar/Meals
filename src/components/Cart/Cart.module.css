@@ -1,8 +1,16 @@
+.cart {
+  margin: 5rem;
+  width: 45rem;
+  height:auto;
+  padding: 0.5rem;
+  border-radius: 14px;
+  background-color: white;
+}
 .cart_items {
   list-style: none;
   margin: 0;
   padding: 0;
-  max-height: 20rem;
+  max-height: auto;
   overflow: auto;
 }
 

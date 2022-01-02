@@ -3,13 +3,15 @@ import React from "react";
 import styles from "./CartItem.module.css";
 
 const CartItem = (props) => {
+  console.log(props.quantity);
+  const quantity = "x " + props.quantity;
   return (
-    <div className="styles.cart-item">
+    <div className={styles.cart_item}>
       <div>
         <h2>{props.name}</h2>
         <div className={styles.summary}>
           <div className={styles.price}>{props.price}</div>
-          <div className={styles.amount}>{`x ${props.subTotal}`}</div>
+          <div className={styles.amount}>{quantity}</div>
         </div>
       </div>
       <div className={styles.actions}>

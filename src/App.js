@@ -41,7 +41,7 @@ function App() {
   //TODO: popup OrderSummery Modal
   const menulookup = {};
   menuList.forEach((mi) => (menulookup[mi.id] = mi));
-  localStorage.setItem("menu", menuList);
+  localStorage.setItem("menu", JSON.stringify(menulookup));
 
   const viewOrderHandler = () => {
     setShowCart(true);
@@ -58,13 +58,7 @@ function App() {
     // <div className={styles.main}>
     <React.Fragment>
       <MainHeader onViewCart={viewOrderHandler} />
-      {showCart && (
-        <Cart
-          menu={menulookup}
-          onClose={onCloseHandler}
-          onOrder={onOrderHandler}
-        />
-      )}
+      {showCart && <Cart onClose={onCloseHandler} onOrder={onOrderHandler} />}
       <MealList menuList={menuList} />
     </React.Fragment>
   );
