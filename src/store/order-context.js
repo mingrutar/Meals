@@ -3,7 +3,8 @@ import React, { useState, useEffect, createContext } from "react";
 // TODO: add sum?
 const OrderContext = createContext({
   totalMeals: 0,
-  order: () => [],
+  order: () => {},
+  orderMeal: (mealId) => undefined,
   cleanOrder: () => {},
   onAdd: (mealId, quantity) => {},
   onRemove: (mealId) => {},
@@ -12,10 +13,10 @@ const OrderContext = createContext({
 
 export const OrderContextProvide = (props) => {
   const [mealCounter, setMealCounter] = useState(0);
-  const [meals, setMeals] = useState([]);
+  const [meals, setMeals] = useState({}); // {menuId: quantity}
 
   useEffect(() => {
-    const total = meals.reduce((sum, x) => (sum += x.quantity), 0);
+    const total = meals.keys().reduce((sum, x) => (sum += meals[x]), 0);
     setMealCounter(total);
     return () => {};
   }, [meals]);
@@ -27,41 +28,26 @@ export const OrderContextProvide = (props) => {
   // };
   const addMealHandler = (mealId, quantity) => {
     // console.debug(`addMealHandler: (${mealId}, ${+quantity}) meals=`, meals);
-    const idx = meals.findIndex((meal) => meal.id === mealId);
-    if (idx < 0) {
-      // new
-      setMeals((prev) => {
-        const curOrder = [{ id: mealId, quantity: +quantity }, ...prev];
-        // console.log("addMealHandler =", curOrder);
-        return curOrder;
-      });
-    } else {
+    if (meals[mealId] !== +quantity) {
       setMeals((prev) => {
         const curOrder = [...prev];
-        curOrder[idx]["quantity"] = +quantity;
+        curOrder[mealId] = +quantity;
         return curOrder;
       });
     }
   };
   const deleteMealHandler = (mealId) => {
     // console.debug(`deleteMealHandler: id=${mealId}`);
-    const idx = meals.findIndex((meal) => meal.id === mealId);
-    if (idx > -1)
-      setMeals((prev) => {
-        const newOrder = [...prev];
-        newOrder.splice(idx, 1);
-      });
-    else
-      console.log(`Meal(${mealId}) is not found in order, cannot be deleted`);
+    if (mealId in meals) {
+      setMeals((prev) => prev.filter((id) => id !== mealId));
+    }
   };
   const onUpdateHandler = (mealId, val) => {
-    console.debug(`onUpdateHandler: (${mealId}, ${+val})`);
-    const idx = meals.findIndex((meal) => meal.id === mealId);
-    if (idx > -1) {
-      const newVal = Math.max(meals[idx]["quantity"] + val, 0);
+    // console.debug(`onUpdateHandler: (${mealId}, ${+val})`);
+    if (mealId in meals) {
       setMeals((prev) => {
         const curOrder = [...prev];
-        curOrder[idx]["quantity"] = newVal;
+        curOrder[mealId] += +val;
         return curOrder;
       });
     }
@@ -69,6 +55,8 @@ export const OrderContextProvide = (props) => {
   const getOrder = () => {
     return meals;
   };
+  const orderMeal = (mealId) => meals[mealId];
+
   const cleanUp = () => {
     setMeals([]);
   };
@@ -80,6 +68,7 @@ export const OrderContextProvide = (props) => {
         onRemove: deleteMealHandler,
         onUpdate: onUpdateHandler,
         order: getOrder,
+        orderMeal: orderMeal,
         cleanOrder: cleanUp,
       }}
     >

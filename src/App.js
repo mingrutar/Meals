@@ -4,7 +4,8 @@ import MainHeader from "./components/MainHeader/MainHeader";
 import MealList from "./components/Meals/MealList/MealList";
 import Cart from "./components/Cart/Cart";
 import OrderContext from "./store/order-context";
-import Modal from "./components/UI/Modal/Modal";
+import ContainerModal from "./components/UI/Modal/ContainerModal";
+import Button from "./components/UI/Button/Button";
 
 const menuList = [
   {
@@ -65,17 +66,22 @@ function App() {
     setShowCart(false);
   };
 
+  const modalHeader = <h2>Make order</h2>;
+  const modalContent = <p>The function is not supported yet</p>;
+  const modalFooter = <Button onClick={resetOrder}>Okay</Button>;
+
   return (
     // <div className={styles.main}>
     <React.Fragment>
       <MainHeader onViewCart={viewOrderHandler} />
       {showCart && <Cart onClose={onCloseHandler} onOrder={onOrderHandler} />}
       {ordering !== null && (
-        <Modal
-          title={ordering.title}
-          message={ordering.message}
+        <ContainerModal
+          header={modalHeader}
+          message={modalContent}
+          footer={modalFooter}
           reset={resetOrder}
-        ></Modal>
+        ></ContainerModal>
       )}
 
       <MealList menuList={menuList} />

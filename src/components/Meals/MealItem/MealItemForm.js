@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import validator from "validator";
 
 import orderContext from "../../../store/order-context";
@@ -11,20 +11,33 @@ const MealItemForm = (props) => {
   const orderCtx = useContext(orderContext);
 
   // TODO: useReducer
-  const [isValid, setIsValid] = useState(true);
+  const [isAdded, setIsAdded] = useState(false);
   const [quantity, setQuantity] = useState("");
 
+  useEffect(() => {
+    return () => {
+      if (isAdded) {
+        let qval = orderCtx.orderMeal(props.id);
+        if (qval === undefined) qval = "";
+        if (qval !== quantity) setQuantity(qval);
+      }
+    };
+  }, [orderCtx.totalMeals]);
+
   const addMeal = () => {
-    if (quantity.trim().length > 0) orderCtx.onAdd(props.id, +quantity);
-    else console.log(`Please enter a valid quality`);
+    if (quantity.trim().length > 0) {
+      orderCtx.onAdd(props.id, +quantity);
+      setIsAdded(true);
+    } else console.log(`Please enter a valid quality`);
   };
   // check entered is a number
   const onChangeHandler = (event) => {
     const enteredVal = event.target.value;
-    const isValNumber =
-      enteredVal.trim().length > 0 ? validator.isNumeric(enteredVal) : true;
-    setIsValid(isValNumber);
-    if (isValNumber) setQuantity(enteredVal);
+
+    if (enteredVal.trim().length > 0 && validator.isNumeric(enteredVal)) {
+      setQuantity(enteredVal);
+      setIsAdded(false);
+    }
   };
   return (
     <form className={styles.form}>
@@ -37,7 +50,6 @@ const MealItemForm = (props) => {
       <Button type="button" onClick={addMeal}>
         + Add
       </Button>
-      {!isValid && <p>Please enter amount number</p>}
     </form>
   );
 };
