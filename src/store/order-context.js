@@ -16,7 +16,7 @@ export const OrderContextProvide = (props) => {
   const [meals, setMeals] = useState({}); // {menuId: quantity}
 
   useEffect(() => {
-    const total = meals.keys().reduce((sum, x) => (sum += meals[x]), 0);
+    const total = Object.keys(meals).reduce((sum, x) => (sum += meals[x]), 0);
     setMealCounter(total);
     return () => {};
   }, [meals]);
