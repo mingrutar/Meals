@@ -59,7 +59,7 @@ export const OrderContextProvide = (props) => {
   const orderMeal = (mealId) => meals[mealId];
 
   const cleanUp = () => {
-    setMeals([]);
+    setMeals({});
   };
   return (
     <OrderContext.Provider

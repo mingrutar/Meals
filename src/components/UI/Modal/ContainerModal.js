@@ -10,7 +10,9 @@ const ContainerModal = (props) => {
 
       <Card className={styles.modal}>
         {props.header && (
-          <header className={styles.header}>{props.header}</header>
+          <header className={styles.header}>
+            <h2>{props.header}</h2>
+          </header>
         )}
         <div className={styles.content}>{props.content}</div>
         {props.footer && (

@@ -3,7 +3,7 @@ import React from "react";
 import styles from "./CartItem.module.css";
 
 const CartItem = (props) => {
-  console.log(props.quantity);
+  // console.debug(props.quantity);
   const quantity = "x " + props.quantity;
   return (
     <div className={styles.cart_item}>
