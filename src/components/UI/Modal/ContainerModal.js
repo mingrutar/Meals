@@ -1,9 +1,9 @@
 import React from "react";
 
 import Card from "../Card/Card";
-import styles from "./ContainerModal,css";
+import styles from "./ContainerModal.module.css";
 
-const Modal = (props) => {
+const ContainerModal = (props) => {
   return (
     <div>
       <div className={styles.backdrop} onClick={props.reset}></div>
@@ -21,4 +21,4 @@ const Modal = (props) => {
   );
 };
 
-export default Modal;
+export default ContainerModal;

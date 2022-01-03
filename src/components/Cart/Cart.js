@@ -14,14 +14,14 @@ const Cart = (props) => {
   const jsonMenu = localStorage.getItem("menu");
   const menu = JSON.parse(jsonMenu);
   let total = 0;
-  const orderDetails = order.map((meal) => {
-    const mid = menu[meal.id]; // menu item detal
-    total += mid.price * meal.quantity;
+  const orderDetails = Object.keys(order).map((mealId) => {
+    const mid = menu[mealId]; // menu item detal
+    total += mid.price * order[mealId]; // quantity;
     return {
-      id: meal.id,
+      id: mealId,
       name: mid.name,
       price: mid.price,
-      quantity: meal.quantity,
+      quantity: order[mealId],
     };
   });
   total = total.toFixed(2);

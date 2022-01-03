@@ -15,13 +15,12 @@ const MealItemForm = (props) => {
   const [quantity, setQuantity] = useState("");
 
   useEffect(() => {
-    return () => {
-      if (isAdded) {
-        let qval = orderCtx.orderMeal(props.id);
-        if (qval === undefined) qval = "";
-        if (qval !== quantity) setQuantity(qval);
-      }
-    };
+    if (props.showCart) {
+      let qval = orderCtx.orderMeal(props.id);
+      if (qval === undefined) qval = "";
+      if (qval !== quantity) setQuantity(qval);
+    }
+    return () => {};
   }, [orderCtx.totalMeals]);
 
   const addMeal = () => {
@@ -41,6 +40,7 @@ const MealItemForm = (props) => {
   };
   return (
     <form className={styles.form}>
+      {/* isAdded, change text color to gray */}
       <Input
         label="Amount"
         onChange={onChangeHandler}

@@ -42,7 +42,7 @@ function App() {
   const orderCtx = useContext(OrderContext);
 
   const [showCart, setShowCart] = useState(false);
-  const [ordering, setOrdering] = useState(null);
+  const [showOrdering, setShowOrdering] = useState(false);
 
   const storeMenu = () => {
     const menulookup = {};
@@ -55,19 +55,19 @@ function App() {
   };
   const onOrderHandler = (order) => {
     console.log("Order meals ...", order);
-    setOrdering({ title: "Order ...", message: "Please click okay" });
+    setShowOrdering(true);
   };
   const resetOrder = () => {
     orderCtx.cleanOrder();
-    setOrdering(null);
     setShowCart(false);
+    setShowOrdering(false);
   };
   const onCloseHandler = () => {
     setShowCart(false);
   };
 
-  const modalHeader = <h2>Make order</h2>;
-  const modalContent = <p>The function is not supported yet</p>;
+  const modalHeader = <h2>Order ...</h2>;
+  const modalContent = <p>Please click okay</p>;
   const modalFooter = <Button onClick={resetOrder}>Okay</Button>;
 
   return (
@@ -75,16 +75,16 @@ function App() {
     <React.Fragment>
       <MainHeader onViewCart={viewOrderHandler} />
       {showCart && <Cart onClose={onCloseHandler} onOrder={onOrderHandler} />}
-      {ordering !== null && (
+      {showOrdering && (
         <ContainerModal
           header={modalHeader}
-          message={modalContent}
+          content={modalContent}
           footer={modalFooter}
           reset={resetOrder}
         ></ContainerModal>
       )}
 
-      <MealList menuList={menuList} />
+      <MealList menuList={menuList} showCart={showCart} />
     </React.Fragment>
   );
 }

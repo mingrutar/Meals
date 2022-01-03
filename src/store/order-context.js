@@ -30,9 +30,9 @@ export const OrderContextProvide = (props) => {
     // console.debug(`addMealHandler: (${mealId}, ${+quantity}) meals=`, meals);
     if (meals[mealId] !== +quantity) {
       setMeals((prev) => {
-        const curOrder = [...prev];
-        curOrder[mealId] = +quantity;
-        return curOrder;
+        const cur = { ...prev };
+        cur[mealId] = quantity;
+        return cur;
       });
     }
   };
@@ -46,9 +46,10 @@ export const OrderContextProvide = (props) => {
     // console.debug(`onUpdateHandler: (${mealId}, ${+val})`);
     if (mealId in meals) {
       setMeals((prev) => {
-        const curOrder = [...prev];
-        curOrder[mealId] += +val;
-        return curOrder;
+        const newVal = prev[mealId] + +val;
+        const cur = { ...prev };
+        cur[mealId] = newVal;
+        return cur;
       });
     }
   };
