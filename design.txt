@@ -1,6 +1,0 @@
-
-Behavior
-1. Login b(Cart) ^login-> 'My Order History' Logout b(Cart)
-2.               ^(Cart)-> Modal(Summary)
-
-3. 'My Order History' is a dummy page
