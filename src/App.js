@@ -66,7 +66,6 @@ function App() {
     setShowCart(false);
   };
 
-  const modalHeader = <h2>Order ...</h2>;
   const modalContent = <p>Please click okay</p>;
   const modalFooter = <Button onClick={resetOrder}>Okay</Button>;
 
@@ -77,7 +76,7 @@ function App() {
       {showCart && <Cart onClose={onCloseHandler} onOrder={onOrderHandler} />}
       {showOrdering && (
         <ContainerModal
-          header={modalHeader}
+          header="Order ..."
           content={modalContent}
           footer={modalFooter}
           reset={resetOrder}

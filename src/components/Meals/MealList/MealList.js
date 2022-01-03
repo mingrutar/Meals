@@ -7,8 +7,8 @@ import MealItemForm from "../MealItem/MealItemForm";
 import styles from "./MealList.module.css";
 
 const MealList = (props) => {
-  const ss = props.showStatus;
-  if (ss === 2) props.resetStatus();
+  const ss = props.showCart;
+  // if (ss === 2) props.resetStatus();
 
   return (
     <ul className={styles.ul}>
@@ -23,7 +23,7 @@ const MealList = (props) => {
               max_quantity={mi.max_quantity}
             />
             <MealItemForm
-              showStatus={ss}
+              showCart={ss}
               id={mi.id}
               max_quantity={mi.max_quantity}
             />
